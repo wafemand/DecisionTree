@@ -107,7 +107,8 @@ class DecisionTree(BaseEstimator):
         mask = node.predicate(X)
         y_l = iter(self._predict(X[mask], node.node_left))
         y_r = iter(self._predict(X[~mask], node.node_right))
-        return np.array([next(y_l) if isLeft else next(y_r) for isLeft in mask])
+        return np.array([next(y_l) if isLeft else next(y_r)
+                         for isLeft in mask])
 
 
 
@@ -127,4 +128,5 @@ class DecisionTree(BaseEstimator):
 
 
     def predict(self, X):
-        return np.array([node.get_prediction() for node in self._predict(X, self._tree_root)])
+        return np.array([node.get_prediction()
+                         for node in self._predict(X, self._tree_root)])

@@ -27,7 +27,10 @@ def variance_generator(y):
     sum_r = sum(y)
     sum2_l = 0
     sum2_r = sum(y**2)
-    var = lambda s, s2, n : s2 / n - (s / n)**2
+
+    def var(s, s2, n):
+        return s2 / n - (s / n)**2
+
     cnt = 0
     for value in y[:-1]:
         sum_l += value

@@ -11,7 +11,8 @@ class DecisionTreeClassifier(DecisionTree):
             counter = Counter(y)
             n = sum(counter.values())
             self.class_name = np.array([counter.most_common(1)[0][0]])
-            self.prob = np.array([counter[i] / n for i in range(number_of_classes)])
+            self.prob = np.array([counter[i] / n
+                                  for i in range(number_of_classes)])
 
         def get_prediction(self):
             return self.class_name
@@ -32,4 +33,5 @@ class DecisionTreeClassifier(DecisionTree):
 
 
     def predict_proba(self, X):
-        return np.array([node.get_prob() for node in self._predict(X, self._tree_root)])
+        return np.array([node.get_prob()
+                         for node in self._predict(X, self._tree_root)])
