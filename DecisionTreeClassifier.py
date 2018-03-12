@@ -10,18 +10,14 @@ class DecisionTreeClassifier(DecisionTree):
         def __init__(self, y, number_of_classes):
             counter = Counter(y)
             n = sum(counter.values())
-            class_name = np.array([counter.most_common(1)[0][0]])
-            prob = np.array([counter[i] / n for i in range(number_of_classes)])
-            self.full_info = np.concatenate((class_name, prob))
+            self.class_name = np.array([counter.most_common(1)[0][0]])
+            self.prob = np.array([counter[i] / n for i in range(number_of_classes)])
 
         def get_prediction(self):
-            return self.full_info[0]
+            return self.class_name
 
         def get_prob(self):
-            return self.full_info[1:]
-
-        def get_full_info(self):
-            return self.full_info
+            return self.prob
 
 
 

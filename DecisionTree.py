@@ -23,13 +23,12 @@ class DecisionTree(BaseEstimator):
 
 
 
-    def _get_predicate(self, feature, value):
+    @staticmethod
+    def _get_predicate(feature, value):
         def predicate(X):
             return X[:, feature] < value
 
-        if self.debug:
-            predicate.feature = feature
-            predicate.value = value
+
 
         return predicate
 
@@ -106,8 +105,8 @@ class DecisionTree(BaseEstimator):
             return np.array([node] * len(X))
 
         mask = node.predicate(X)
-        y_l = (y for y in self._predict(X[mask], node.node_left))
-        y_r = (y for y in self._predict(X[~mask], node.node_right))
+        y_l = iter(self._predict(X[mask], node.node_left))
+        y_r = iter(self._predict(X[~mask], node.node_right))
         return np.array([next(y_l) if isLeft else next(y_r) for isLeft in mask])
 
 

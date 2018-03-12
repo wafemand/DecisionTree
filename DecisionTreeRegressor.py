@@ -6,13 +6,10 @@ from DecisionTree import DecisionTree
 class DecisionTreeRegressor(DecisionTree):
     class LeafNode:
         def __init__(self, y):
-            self.full_info = y.mean()
+            self.mean = y.mean()
 
         def get_prediction(self):
-            return self.full_info
-
-        def get_full_info(self):
-            return self.full_info
+            return self.mean
 
 
 
